@@ -137,7 +137,7 @@ spec:
         - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
         - --kubelet-use-node-status-port
         - --kubelet-insecure-tls
-        - --metric-resolution=15s
+        - --metric-resolution=10s
         image: registry.k8s.io/metrics-server/metrics-server:v0.7.2
         imagePullPolicy: IfNotPresent
         livenessProbe:
@@ -146,7 +146,7 @@ spec:
             path: /livez
             port: https
             scheme: HTTPS
-          periodSeconds: 10
+          periodSeconds: 2
         name: metrics-server
         ports:
         - containerPort: 10250
@@ -158,8 +158,8 @@ spec:
             path: /readyz
             port: https
             scheme: HTTPS
-          initialDelaySeconds: 20
-          periodSeconds: 10
+          initialDelaySeconds: 10
+          periodSeconds: 2
         resources:
           requests:
             cpu: 100m
